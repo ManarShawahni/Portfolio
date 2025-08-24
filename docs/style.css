@@ -3,10 +3,18 @@ body {
     margin: 0px;
 }
 
+header {
+  position: sticky;
+  background-color: #f8f3eb;
+  top: 0;
+  padding: 3px;
+
+}
 .nav {
     list-style: none;
+    top:0;
     display: flex;
-    margin: 5px;
+    margin: 0px;
     gap: 40px;
     font-size: 25px;
 }
@@ -19,6 +27,31 @@ body {
 
 .nav a:hover {
     color: #7b2e2f;
+   /* background-color:#ededed;*/
+}
+
+
+/*******************************/
+
+.menu-toggle {
+  display: none;
+}
+
+.menu-icon {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px;
+}
+
+.menu-icon span {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background-color: #7b2e2f;
+  border-radius: 2px;
+  transition: 0.3s ease;
 }
 
 .home {
@@ -85,6 +118,15 @@ body {
                blink 0.6s step-end infinite;
 }
 
+h2::after {
+  content: "──────────── ୨ৎ ────────────";
+  display: block;
+  text-align: center;
+  color: #000000;
+  margin-top: 18px;
+  font-size: 16px;
+}
+
 .skills {
     padding: 10px 10px;
     text-align: center;
@@ -112,8 +154,11 @@ body {
 .skills-grid {
     display: grid;
     justify-content: center;
+    justify-items: center;
     gap: 20px;
     grid-template-columns: 140px 140px 140px 140px 140px;
+    padding:0px;
+
 }
 
 .experience {
@@ -193,6 +238,7 @@ body {
 .project-container p {
     font-size: 20px;
     margin: 20px 10px 50px;
+    text-align: justify;
 }
 
 .project-card {
@@ -245,28 +291,26 @@ body {
     padding: 30px;
 }
 
-.form-group,
+.form-group {
+    font-size: larger;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
 .message-group {
     font-size: larger;
     display: flex;
-    gap: 10px;
     align-items: center;
+    gap: 4px;
 }
 
-input,
-textarea {
+input {
     border-radius: 30px;
     padding: 10px 20px;
 }
-
-.message-group {
-    flex-direction: column;
-}
-
-.message-group textarea {
-    width: 230px;
-    height: 100px;
-    resize: none;
+textarea {
+   border-radius: 30px;
+   padding: 4px 20px;
 }
 
 .button {
@@ -312,12 +356,48 @@ textarea {
 }
 
 @media only screen and (max-width: 600px) {
-  .nav {
-    gap: 16px;
-    font-size: 18px;
-    padding: 8px 12px;
+  
+  .menu-icon {
+    display: flex;
+    font-size: 20px;
+    padding: 2px;
+    font-weight: bold;
   }
 
+.nav {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #f8f3eb;
+    gap: 20px;
+    padding: 20px 0;
+    display: none;
+    text-align: center;
+    border-top: 2px solid #7b2e2f;
+  }
+
+  .menu-toggle:checked + .menu-icon + nav .nav {
+    display: flex;
+  }
+/*
+  .menu-toggle:checked + .menu-icon .top {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+  */
+  .menu-toggle:checked + .menu-icon span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle:checked + .menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle:checked + .menu-icon span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+  
   .home {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -355,6 +435,7 @@ textarea {
   .skills-grid {
     grid-template-columns: repeat(2, 140px);
     gap: 16px;
+
   }
 
   .skill {
@@ -403,6 +484,8 @@ textarea {
   .typing-text {
     font-size: 22px;
   }
+
+
 }
 
 @media only screen and (min-width: 600px) {
@@ -472,26 +555,12 @@ textarea {
     grid-template-columns: 1fr 120px;
   }
 
-  .projects {
-    padding: 30px;
-  }
-  .project-container {
-    grid-template-columns: repeat(2, 1fr);
-    padding:30px;
-    gap:55px;
-  }
-
   .project-card {
     max-width: 480px;
   }
 
-    .tags {
+  .tags {
     font-size: 12px;
-
-  }
-
-  .tag {
-    margin:0;
   }
 }
 
@@ -513,27 +582,9 @@ textarea {
     width: 80%;
   }
 
-.projects {
-    padding: 30px;
-  }
 
   .project-container {
     grid-template-columns: repeat(3, 1fr);
-    padding:30px;
-    gap:55px;
-  }
-
-  .project-card {
-    max-width: 420px;
-  }
-
-  .tags {
-    font-size: 12px;
-
-  }
-
-  .tag {
-    margin:0;
   }
 }
 
@@ -545,11 +596,6 @@ textarea {
   .experience-card {
     width: 70%;
   }
-
-  .project-container {
-    grid-template-columns: repeat(3, 1fr);
-
-  }
 }
 
 @media only screen and (max-width: 360px) {
@@ -560,23 +606,15 @@ textarea {
   }
 
   .home {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "image"
-      "text"
-      "contact";
     font-size: 18px;
     padding: 12px;
   }
 
   .home-text {
     margin: 12px;
-    font-size: 18px;
   }
 
   .home-image {
-    display: flex;
-    justify-content: center;
     padding-top: 8px;
   }
 
@@ -616,11 +654,13 @@ textarea {
 
   .experience-card {
     width: 80%;
-    grid-template-columns: 1fr;
     gap: 10px;
 
   }
 
+  .exp-box {
+    gap: 10px;
+  }
   .exp-logo {
     max-height: 40px;
   }
@@ -630,7 +670,6 @@ textarea {
   }
 
   .project-container {
-    grid-template-columns: 1fr;
     gap: 12px;
     padding: 20px;
   }
@@ -642,9 +681,7 @@ textarea {
 
   }
 
-  .exp-box {
-    gap: 10px;
-  }
+
   .project-card h3 {
     font-size: 18px;
   }
@@ -676,29 +713,20 @@ textarea {
   }
 
   .home {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "image"
-      "text"
-      "contact";
     font-size: 20px;
     padding: 14px;
   }
 
   .home-text {
     margin: 14px;
-    font-size: 20px;
   }
 
   .home-image {
-    display: flex;
-    justify-content: center;
     padding-top: 10px;
   }
 
   .home-contact {
     margin: 14px 0;
-    gap: 12px;
   }
 
   .home-contact a {
@@ -731,9 +759,6 @@ textarea {
   }
 
   .experience-card {
-    width: 95%;
-    grid-template-columns: 1fr;
-    gap: 12px;
     padding: 18px;
   }
 
@@ -746,13 +771,11 @@ textarea {
   }
 
   .project-container {
-    grid-template-columns: 1fr;
     gap: 14px;
     padding:20px;
   }
 
   .project-card {
-    width: 100%;
     max-width: 460px;
     padding: 18px;
   }
